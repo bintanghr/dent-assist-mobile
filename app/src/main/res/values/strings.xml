@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DentAssist</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="sudah_cek_kesehatan_mulutmu">Sudah cek kesehatan mulutmu?</string>
+    <string name="klinik_terdekat">Klinik Terdekat</string>
+    <string name="lihat_semua">Lihat semua</string>
+    <string name="klinik_pilihan_kami_di_sekelilingmu">Klinik pilihan kami di sekelilingmu</string>
+    <string name="item_image">item image</string>
+    <string name="obat">Obat</string>
+    <string name="untuk_kebutuhan_kesehatan_mulutmu">Untuk kebutuhan kesehatan mulutmu</string>
+</resources>
