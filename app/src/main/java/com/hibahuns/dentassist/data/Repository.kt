@@ -3,6 +3,7 @@ package com.hibahuns.dentassist.data
 import com.hibahuns.dentassist.data.api.request.LoginRequest
 import com.hibahuns.dentassist.data.api.request.SignupRequest
 import com.hibahuns.dentassist.data.api.request.UpdateUserRequest
+import com.hibahuns.dentassist.data.api.response.ArticleResponse
 import com.hibahuns.dentassist.data.api.response.ClinicResponse
 import com.hibahuns.dentassist.data.api.response.HistoryResponse
 import com.hibahuns.dentassist.data.api.response.LoginResponse
@@ -64,6 +65,10 @@ class Repository private constructor(
 
     suspend fun getProducts(): ProductResponse {
         return apiService.getProducts()
+    }
+
+    suspend fun getArticles(): ArticleResponse {
+        return apiService.getArticles()
     }
 
     suspend fun getHistory(idUser: String): HistoryResponse {

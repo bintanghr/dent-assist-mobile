@@ -3,6 +3,7 @@ package com.hibahuns.dentassist.data.api.retrofit
 import com.hibahuns.dentassist.data.api.request.LoginRequest
 import com.hibahuns.dentassist.data.api.request.SignupRequest
 import com.hibahuns.dentassist.data.api.request.UpdateUserRequest
+import com.hibahuns.dentassist.data.api.response.ArticleResponse
 import com.hibahuns.dentassist.data.api.response.ClinicResponse
 import com.hibahuns.dentassist.data.api.response.HistoryResponse
 import com.hibahuns.dentassist.data.api.response.LoginResponse
@@ -61,6 +62,8 @@ interface ApiService {
     @GET("products")
     suspend fun getProducts(): ProductResponse
 
+    @GET("articles")
+    suspend fun getArticles(): ArticleResponse
 
     @POST("logout")
     suspend fun logout(): SignupResponse

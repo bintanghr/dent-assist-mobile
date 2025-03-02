@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
         }
 
         setupObserver()
+        homeViewModel.fetchArticles()
         homeViewModel.fetchClinics()
         homeViewModel.fetchProducts()
 
@@ -88,13 +89,40 @@ class HomeFragment : Fragment() {
 
                             for (product in products) {
                                 val title: String = product?.name ?: ""
-                                val description: String = (product?.price.toString()) ?: ""
+                                val description: String = (product?.price.toString())
                                 val imageUrl: String = product?.linkPhoto ?: ""
                                 val data = RvDataItem(title, description, imageUrl)
                                 rvData.add(data)
                             }
 
                             binding.productsRecyclerView.apply {
+                                layoutManager =
+                                    LinearLayoutManager(
+                                        context,
+                                        LinearLayoutManager.HORIZONTAL,
+                                        false
+                                    )
+                                adapter = RvAdapter(rvData)
+                            }
+                        }
+                    }
+                }
+
+                launch {
+                    homeViewModel.articles.collect { response ->
+                        response?.data?.let { articles ->
+                            val rvData: MutableList<RvDataItem> = mutableListOf()
+
+                            for (article in articles) {
+                                val title: String = article?.disease ?: ""
+                                val description: String = article?.name ?: ""
+//                                val imageUrl: String = article?.linkPhoto ?: "https://drive.google.com/uc?export=view&id=17s-a0tqsyQsDB5fmeR75ye2Z1vnDK1Wt"
+                                val imageUrl = "https://drive.google.com/uc?export=view&id=17s-a0tqsyQsDB5fmeR75ye2Z1vnDK1Wt"
+                                val data = RvDataItem(title, description, imageUrl)
+                                rvData.add(data)
+                            }
+
+                            binding.articlesRecyclerView.apply {
                                 layoutManager =
                                     LinearLayoutManager(
                                         context,

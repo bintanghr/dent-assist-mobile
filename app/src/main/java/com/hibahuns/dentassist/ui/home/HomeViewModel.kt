@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hibahuns.dentassist.data.Repository
+import com.hibahuns.dentassist.data.api.response.ArticleResponse
 import com.hibahuns.dentassist.data.api.response.ClinicResponse
 import com.hibahuns.dentassist.data.api.response.ProductResponse
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +26,9 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     private val _products = MutableStateFlow<ProductResponse?>(null)
     val products: StateFlow<ProductResponse?> = _products
 
+    private val _articles = MutableStateFlow<ArticleResponse?>(null)
+    val articles: StateFlow<ArticleResponse?> = _articles
+
     fun fetchClinics() {
         viewModelScope.launch {
             try {
@@ -41,6 +45,17 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
             try {
                 val response = repository.getProducts()
                 _products.value = response
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun fetchArticles() {
+        viewModelScope.launch {
+            try {
+                val response = repository.getArticles()
+                _articles.value = response
             } catch (e: Exception) {
                 e.printStackTrace()
             }
