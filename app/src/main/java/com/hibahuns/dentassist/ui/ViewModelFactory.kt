@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hibahuns.dentassist.data.Repository
 import com.hibahuns.dentassist.di.Injection
+import com.hibahuns.dentassist.ui.dashboard.DashboardViewModel
 import com.hibahuns.dentassist.ui.home.HomeViewModel
 import com.hibahuns.dentassist.ui.notifications.NotificationsViewModel
+import com.hibahuns.dentassist.ui.prediction.PredictionViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -19,6 +21,12 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(NotificationsViewModel::class.java) -> {
                 NotificationsViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
+                DashboardViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(PredictionViewModel::class.java) -> {
+                PredictionViewModel(repository) as T
             }
 //            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
 //                LoginViewModel(repository) as T

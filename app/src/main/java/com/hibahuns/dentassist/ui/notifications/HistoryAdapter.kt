@@ -1,7 +1,6 @@
 package com.hibahuns.dentassist.ui.notifications
 
 import android.os.Build
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -12,12 +11,11 @@ import com.hibahuns.dentassist.R
 import com.hibahuns.dentassist.data.api.response.DataItemHistory
 import com.bumptech.glide.Glide
 import com.hibahuns.dentassist.databinding.RvItemHistoryBinding
+import java.text.DecimalFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
-
-@Suppress("DEPRECATION")
 class HistoryAdapter : ListAdapter<DataItemHistory, HistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -33,34 +31,24 @@ class HistoryAdapter : ListAdapter<DataItemHistory, HistoryAdapter.ViewHolder>(D
     }
 
     class ViewHolder(private val binding: RvItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(data: DataItemHistory) {
+            val accuracy = "Akurasi ${DecimalFormat("#.##").format(data.confidenceScore)}%"
             binding.timestamp.text = formatTimestamp(data.createdAt)
             binding.itemTitle.text = data.label
-            binding.itemDescription.text= Html.fromHtml(
-                "Akurasi ${String.format("%.2f", data.confidenceScore)}%"
-            )
+            binding.itemDescription.text= accuracy
             Glide.with(itemView.context)
                 .load(data.imageUrl)
                 .placeholder(R.drawable.image_preview)
                 .error(R.drawable.image_preview)
                 .into(binding.itemImg)
-
-
-
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
         private fun formatTimestamp(ts: String): String {
-            val input = "2025-03-02T15:50:03.090Z"
+            val instant = Instant.parse(ts)
+            val localDateTime = instant.atZone(ZoneId.of("Asia/Jakarta"))
 
-            // Parsing string ke Instant (UTC)
-            val instant = Instant.parse(input)
-
-            // Konversi ke zona waktu lokal (WIB, UTC+7 misalnya)
-            val zoneId = ZoneId.of("Asia/Jakarta")
-            val localDateTime = instant.atZone(zoneId)
-
-            // Format tanggal sesuai keinginan
             val formatter = DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm", Locale.ENGLISH)
             val formattedDate = localDateTime.format(formatter)
 
@@ -73,6 +61,7 @@ class HistoryAdapter : ListAdapter<DataItemHistory, HistoryAdapter.ViewHolder>(D
         return ViewHolder(binding)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {

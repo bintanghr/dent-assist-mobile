@@ -51,7 +51,7 @@
             app:cardElevation="2dp"
             app:cardMaxElevation="6dp"
             app:cardCornerRadius="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@android:color/white"
             app:cardUseCompatPadding="false">
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -115,7 +115,7 @@
             app:cardElevation="2dp"
             app:cardMaxElevation="4dp"
             app:cardCornerRadius="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@android:color/white"
             app:cardUseCompatPadding="false">
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -179,7 +179,7 @@
             app:cardElevation="2dp"
             app:cardMaxElevation="4dp"
             app:cardCornerRadius="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="65dp"
             app:cardBackgroundColor="@android:color/white"
             app:cardUseCompatPadding="false"

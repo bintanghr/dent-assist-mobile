@@ -1,10 +1,16 @@
 package com.hibahuns.dentassist.ui.notifications
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.Html
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +32,7 @@ class NotificationsFragment : Fragment() {
     private lateinit var adapter: HistoryAdapter
     private lateinit var userPreference: UserPreference
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,10 +43,24 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textNotifications
-//        notificationsViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
+        adapter = HistoryAdapter()
+        binding.historyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.historyRecyclerView.adapter = adapter
+        notificationsViewModel.filteredHistories.observe(viewLifecycleOwner) { history ->
+            adapter.submitList(history)
+        }
+
+        val searchInput: EditText = binding.searchInput
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                notificationsViewModel.filterHistory(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         return root
     }
 
@@ -48,16 +69,24 @@ class NotificationsFragment : Fragment() {
 
         userPreference = UserPreference.getInstance(requireContext().dataStore)
 
-        adapter = HistoryAdapter()
-        binding.historyRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.historyRecyclerView.adapter = adapter
-
         lifecycleScope.launch {
 //            val user = userPreference.getSession().first()
 //            notificationsViewModel.getHistory(user.idUser ).observe(viewLifecycleOwner) { history ->
-            notificationsViewModel.getHistory("SDzHFAoNiHtFBnHE58EJ").observe(viewLifecycleOwner) { history ->
-                adapter.submitList(history.data)
-            }
+//            notificationsViewModel.getHistories("SDzHFAoNiHtFBnHE58EJ").observe(viewLifecycleOwner) { history ->
+//                adapter.submitList(history.data)
+//            }
+            notificationsViewModel.getHistories("SDzHFAoNiHtFBnHE58EJ")
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
+            title = Html.fromHtml("<font color='#EA7676'>DentAssist</font>", 1)
+//            setDisplayHomeAsUpEnabled(true)
+//            setHomeAsUpIndicator(R.drawable.baseline_search_24)
         }
     }
 

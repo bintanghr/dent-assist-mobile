@@ -15,11 +15,23 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.hibahuns.dentassist.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_fragmentDashboard_to_fragmentPrediction"
+            app:destination="@id/navigation_prediction" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.hibahuns.dentassist.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_notifications">
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_prediction"
+        android:name="com.hibahuns.dentassist.ui.prediction.PredictionFragment"
+        android:label="Prediction"
+        tools:layout="@layout/fragment_prediction">
+    </fragment>
 </navigation>

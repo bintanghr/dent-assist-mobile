@@ -12,4 +12,10 @@
     <string name="untuk_kebutuhan_kesehatan_mulutmu">Untuk kebutuhan kesehatan mulutmu</string>
     <string name="artikel">Artikel</string>
     <string name="untuk_wacana_harianmu_seputar_kesehatan_mulut">Untuk wacana harianmu seputar kesehatan mulut</string>
+    <string name="detail">Detail</string>
+    <string name="scan">Scan</string>
+    <string name="arahkan_ke_mulut">Arahkan ke mulut</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="foto_yang_telah_dikirimkan">Foto yang telah dikirimkan</string>
 </resources>

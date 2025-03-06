@@ -5,23 +5,33 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hibahuns.dentassist.data.Repository
-import com.hibahuns.dentassist.data.api.response.HistoryResponse
+import com.hibahuns.dentassist.data.api.response.DataItemHistory
 import kotlinx.coroutines.launch
 
 class NotificationsViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _historiesData = MutableLiveData<List<DataItemHistory>>()
+    private val _filteredHistories = MutableLiveData<List<DataItemHistory>>()
+    val filteredHistories: LiveData<List<DataItemHistory>> get() = _filteredHistories
 
-    fun getHistory(idUser: String): LiveData<HistoryResponse> {
-        val historyData = MutableLiveData<HistoryResponse>()
+    fun getHistories(userId: String) {
         viewModelScope.launch {
-            val response = repository.getHistory(idUser)
-            historyData.postValue(response)
-
+            try {
+                val response = repository.getHistory(userId)
+                _historiesData.value = response.data
+                _filteredHistories.value = response.data
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
-        return historyData
+    }
+
+    fun filterHistory(query: String) {
+        val data = _historiesData.value ?: return
+        if (query.isEmpty()) {
+            _filteredHistories.value = data
+        } else {
+            _filteredHistories.value = data.filter { it.label.contains(query, ignoreCase = true) }
+        }
     }
 }

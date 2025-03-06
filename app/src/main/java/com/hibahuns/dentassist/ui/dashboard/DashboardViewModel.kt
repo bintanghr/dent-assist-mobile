@@ -1,13 +1,27 @@
 package com.hibahuns.dentassist.ui.dashboard
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hibahuns.dentassist.data.Repository
+import com.hibahuns.dentassist.data.api.response.PredictResponse
+import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
-class DashboardViewModel : ViewModel() {
+class DashboardViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    val predictResult = MutableLiveData<Result<PredictResponse>>()
+
+    fun predict(imageFile: MultipartBody.Part, idUser: RequestBody) {
+        viewModelScope.launch {
+            try {
+                val response = repository.predict(imageFile, idUser)
+                predictResult.postValue(Result.success(response))
+            } catch (e: Exception) {
+                predictResult.postValue(Result.failure(e))
+            }
+        }
     }
-    val text: LiveData<String> = _text
+
 }

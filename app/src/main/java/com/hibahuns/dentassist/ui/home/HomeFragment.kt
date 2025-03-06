@@ -1,12 +1,16 @@
 package com.hibahuns.dentassist.ui.home
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -137,15 +141,14 @@ class HomeFragment : Fragment() {
             }
         }
     }
-//    @Deprecated("This method has been deprecated in favor of using the\n      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
-//    override fun onBackPressed() {
-//        val intent = Intent(this, MainActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-//        startActivity(intent)
-//        finish()
-//        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-//        super.onBackPressed()
-//    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
+            title = Html.fromHtml("<font color='#EA7676'>DentAssist</font>", 1)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
