@@ -3,6 +3,7 @@ package com.hibahuns.dentassist.data.api.response
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlin.math.exp
 
 @Parcelize
 data class HistoryResponse(
@@ -49,7 +50,23 @@ data class DataItemHistory(
 
 	@field:SerializedName("products")
 	val products: List<ProductsItem>
-) : Parcelable
+) : Parcelable {
+	fun toPredictionData(): PredictionData {
+		return PredictionData(
+			idUser = idUser,
+			createdAt = createdAt,
+			confidenceScore = confidenceScore,
+			signedUrl = imageUrl,
+			suggestion = suggestion,
+			id = id,
+			label = label,
+			clinic = clinic,
+			explanation = explanation,
+			articles = articles,
+			products = products
+		)
+	}
+}
 
 @Parcelize
 data class ArticlesItemHistory(

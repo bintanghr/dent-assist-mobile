@@ -18,4 +18,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="foto_yang_telah_dikirimkan">Foto yang telah dikirimkan</string>
+    <string name="edit_profil">Edit Profil</string>
+    <string name="menemukan_kesulitan">Menemukan kesulitan saat menggunakan aplikasi kami?</string>
+    <string name="hubungi_customer_service">Hubungi customer service DentAssist melalui chat WhatsApp di bawah ini</string>
+    <string name="whatsapp_logo">whatsapp logo</string>
+    <string name="chat_whatsapp">Chat WhatsApp</string>
 </resources>

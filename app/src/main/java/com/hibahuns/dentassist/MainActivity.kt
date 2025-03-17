@@ -8,8 +8,12 @@ import android.view.Window
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.findFragment
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.NavHostFragment.Companion
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -36,9 +40,20 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
+        val customToolbar = findViewById<Toolbar>(R.id.customToolbar)
+        setSupportActionBar(customToolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+
+        val profilePicture = binding.profilePicture
+        profilePicture.setOnClickListener {
+            navController.navigate(R.id.navigation_profile, null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.navigation_home, true)
+                    .build()
+            )
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

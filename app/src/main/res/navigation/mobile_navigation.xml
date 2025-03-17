@@ -9,7 +9,14 @@
         android:id="@+id/navigation_home"
         android:name="com.hibahuns.dentassist.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_to_fragmentProfile"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentCs"
+            app:destination="@id/navigation_cs" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -19,6 +26,9 @@
         <action
             android:id="@+id/action_fragmentDashboard_to_fragmentPrediction"
             app:destination="@id/navigation_prediction" />
+        <action
+            android:id="@+id/action_to_fragmentProfile"
+            app:destination="@id/navigation_profile" />
     </fragment>
 
     <fragment
@@ -26,6 +36,9 @@
         android:name="com.hibahuns.dentassist.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications">
+        <action
+            android:id="@+id/action_fragmentNotifications_to_fragmentPrediction"
+            app:destination="@id/navigation_prediction" />
     </fragment>
 
     <fragment
@@ -34,4 +47,25 @@
         android:label="Prediction"
         tools:layout="@layout/fragment_prediction">
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.hibahuns.dentassist.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentCs"
+            app:destination="@id/navigation_cs" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_cs"
+        android:name="com.hibahuns.dentassist.ui.customer_support.CsFragment"
+        android:label="CS"
+        tools:layout="@layout/fragment_cs">
+
+    </fragment>
+    <action
+        android:id="@+id/action_to_fragmentProfile"
+        app:destination="@id/navigation_profile" />
 </navigation>

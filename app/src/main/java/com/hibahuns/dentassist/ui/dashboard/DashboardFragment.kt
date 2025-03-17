@@ -57,6 +57,7 @@ class DashboardFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
     private var currentImageUri: Uri? = null
     private var croppedImageUri: Uri? = null
+    private var selectedCamera = "front_camera"
 
     private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
@@ -102,7 +103,7 @@ class DashboardFragment : Fragment() {
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(Manifest.permission.CAMERA)
         } else {
-            startCamera()
+            startCamera(selectedCamera)
         }
 
         return root
@@ -119,7 +120,6 @@ class DashboardFragment : Fragment() {
             startGallery()
         }
 
-        var selectedCamera = "front_camera"
         binding.flipCameraButton.setOnClickListener {
             selectedCamera = if (selectedCamera == "front_camera") "rear_camera" else "front_camera"
             startCamera(selectedCamera)

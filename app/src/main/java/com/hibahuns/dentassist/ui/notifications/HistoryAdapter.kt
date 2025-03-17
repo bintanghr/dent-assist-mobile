@@ -1,9 +1,15 @@
 package com.hibahuns.dentassist.ui.notifications
 
 import android.os.Build
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.findFragment
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -66,6 +72,24 @@ class HistoryAdapter : ListAdapter<DataItemHistory, HistoryAdapter.ViewHolder>(D
         val item = getItem(position)
         if (item != null) {
             holder.bind(item)
+
+            holder.itemView.setOnClickListener { view ->
+                val bundle = Bundle().apply {
+                    putParcelable("predictionData", item.toPredictionData())
+                }
+
+                view?.post {
+                    findNavController(view.findFragment())
+                        .navigate(R.id.action_fragmentNotifications_to_fragmentPrediction,
+                            bundle,
+                            NavOptions.Builder()
+                                .setRestoreState(true)
+                                .setPopUpTo(R.id.mobile_navigation, false)
+                                .build()
+                    )
+                }
+            }
+
         }
     }
 }
