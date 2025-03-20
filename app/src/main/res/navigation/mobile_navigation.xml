@@ -63,6 +63,13 @@
         android:name="com.hibahuns.dentassist.ui.customer_support.CsFragment"
         android:label="CS"
         tools:layout="@layout/fragment_cs">
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_clinics"
+        android:name="com.hibahuns.dentassist.ui.clinics.ClinicsFragment"
+        android:label="Klinik"
+        tools:layout="@layout/fragment_clinics">
 
     </fragment>
     <action

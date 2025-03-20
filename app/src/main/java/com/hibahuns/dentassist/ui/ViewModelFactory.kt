@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hibahuns.dentassist.data.Repository
 import com.hibahuns.dentassist.di.Injection
+import com.hibahuns.dentassist.ui.clinics.ClinicsViewModel
 import com.hibahuns.dentassist.ui.dashboard.DashboardViewModel
 import com.hibahuns.dentassist.ui.home.HomeViewModel
 import com.hibahuns.dentassist.ui.notifications.NotificationsViewModel

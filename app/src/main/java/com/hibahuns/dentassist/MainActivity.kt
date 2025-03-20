@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         profilePicture.setOnClickListener {
             navController.navigate(R.id.navigation_profile, null,
                 NavOptions.Builder()
-                    .setPopUpTo(R.id.navigation_home, true)
+                    .setPopUpTo(R.id.navigation_home, false)
                     .build()
             )
         }

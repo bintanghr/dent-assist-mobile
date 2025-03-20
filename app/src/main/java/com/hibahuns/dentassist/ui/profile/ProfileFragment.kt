@@ -1,13 +1,20 @@
 package com.hibahuns.dentassist.ui.profile
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.findFragment
 import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import com.hibahuns.dentassist.R
 import com.hibahuns.dentassist.databinding.FragmentProfileBinding
 
@@ -42,16 +49,26 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
 
         binding.btnEditProfile.setOnClickListener {
-            findNavController(this)
-            .navigate(R.id.navigation_cs,
+            findNavController().navigate(
+                R.id.navigation_cs,
+                null,
                 NavOptions.Builder()
-                    .setRestoreState(true)
-                    .setPopUpTo(R.id.navigation_home, false)
+                    .setPopUpTo(R.id.navigation_profile, false)
                     .build()
             )
         }
 
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
+            title = Html.fromHtml("<font color='#EA7676'>Profile</font>", 1)
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+        }
     }
 
 }

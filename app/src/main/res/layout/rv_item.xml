@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             app:drawableStartCompat="@drawable/baseline_star_24"
             app:layout_constraintTop_toBottomOf="@id/item_description"
+            android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/poppins_regular"
             android:textSize="8sp"

@@ -71,7 +71,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/klinik_terdekat"/>
                 <TextView
-                    android:id="@+id/clinics_btn_show_all"
+                    android:id="@+id/btn_show_all_clinics"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lihat_semua"
@@ -137,7 +137,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/obat"/>
                 <TextView
-                    android:id="@+id/products_btn_show_all"
+                    android:id="@+id/btn_show_all_products"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lihat_semua"
@@ -206,7 +206,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:text="@string/artikel"/>
                 <TextView
-                    android:id="@+id/articles_btn_show_all"
+                    android:id="@+id/btn_show_all_articles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lihat_semua"

@@ -1,11 +1,15 @@
 package com.hibahuns.dentassist.ui.customer_support
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.hibahuns.dentassist.R
 import com.hibahuns.dentassist.databinding.FragmentCsBinding
@@ -43,11 +47,21 @@ class CsFragment : Fragment() {
         val root: View = binding.root
 
         binding.whatsappButton.setOnClickListener {
-            val url = "wa.me/6281391561584"
+            val url = "https://api.whatsapp.com/send/?phone=6282138449930&text&type=phone_number&app_absent=0"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+            requireContext().startActivity(intent)
         }
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
+            title = Html.fromHtml("<font color='#EA7676'>Profile</font>", 1)
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+        }
     }
 
 }
