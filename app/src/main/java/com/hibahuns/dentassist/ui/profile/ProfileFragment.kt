@@ -30,9 +30,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +45,13 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.btnEditProfile.setOnClickListener {
+        val username = "Teuku Umar"
+        val userEmail = "teukubrebes123@gmail.com"
+
+        binding.username.text = username
+        binding.userEmail.text = userEmail
+
+        binding.btnCs.setOnClickListener {
             findNavController().navigate(
                 R.id.navigation_cs,
                 null,
