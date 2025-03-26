@@ -24,4 +24,8 @@
     <string name="whatsapp_logo">whatsapp logo</string>
     <string name="chat_whatsapp">Chat WhatsApp</string>
     <string name="title">Title</string>
+
+    <string name="password_error">Password must not be less than 8 characters</string>
+    <string name="email_error">Invalid email format</string>
+
 </resources>

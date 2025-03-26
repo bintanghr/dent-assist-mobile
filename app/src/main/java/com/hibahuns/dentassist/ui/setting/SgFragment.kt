@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.hibahuns.dentassist.R
 
-class SettingFragment : Fragment() {
+class SgFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

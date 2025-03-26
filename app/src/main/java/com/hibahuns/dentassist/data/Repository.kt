@@ -74,6 +74,7 @@ class Repository private constructor(
     suspend fun getHistory(idUser: String): HistoryResponse {
         return apiService.getHistories(idUser)
     }
+
     suspend fun logout() {
         userPreference.logout()
     }

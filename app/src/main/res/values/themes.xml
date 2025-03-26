@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 <!--    <style name="Theme.DentAssist" parent="Theme.MaterialComponents.DayNight.DarkActionBar">-->
-    <style name="Theme.DentAssist" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
+    <style name="Theme.DentAssist" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Tambahkan properti ini jika perlu -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
 <!--        <item name="colorPrimary">@color/pink</item>-->
         <item name="colorPrimaryVariant">@color/pink</item>
         <item name="colorOnPrimary">@color/font_grey</item>
