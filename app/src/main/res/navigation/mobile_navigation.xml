@@ -64,7 +64,7 @@
 
     <fragment
         android:id="@+id/navigation_cs"
-        android:name="com.hibahuns.dentassist.ui.customer_support.CsFragment"
+        android:name="com.hibahuns.dentassist.ui.profile.CsFragment"
         android:label="CS"
         tools:layout="@layout/fragment_cs">
     </fragment>

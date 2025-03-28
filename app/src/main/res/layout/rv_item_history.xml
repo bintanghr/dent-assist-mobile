@@ -8,7 +8,7 @@
     android:layout_marginBottom="16dp"
     app:cardElevation="8dp"
     app:cardCornerRadius="16dp"
-    app:cardBackgroundColor="#FFFFFF"
+    app:cardBackgroundColor="?attr/backgroundColor"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/black"
             android:textSize="11sp"
             android:maxLines="1"
             android:ellipsize="end"
@@ -51,7 +50,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semi_bold"
-            android:textColor="@color/black"
             android:textSize="15sp"
             android:maxLines="1"
             android:ellipsize="end"
@@ -67,7 +65,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/black"
             android:textSize="11sp"
             android:maxLines="1"
             android:ellipsize="end"

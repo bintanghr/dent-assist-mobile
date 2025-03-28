@@ -1,8 +1,11 @@
 package com.hibahuns.dentassist.ui.signup
 
-import android.content.Intent
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -13,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hibahuns.dentassist.databinding.ActivitySignupBinding
 import com.hibahuns.dentassist.ui.login.LoginActivity
 import com.hibahuns.dentassist.ui.ViewModelFactory
+import android.util.TypedValue
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.hibahuns.dentassist.R
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -33,9 +40,7 @@ class SignupActivity : AppCompatActivity() {
     }
     private fun setupListeners() {
         binding.punyaAkun.setOnClickListener {
-            Intent(this@SignupActivity, LoginActivity::class.java).also {
-                startActivity(it)
-            }
+            finish()
         }
     }
 
@@ -84,19 +89,44 @@ class SignupActivity : AppCompatActivity() {
 
 
     private fun observeViewModel() {
+
+        fun getColorFromAttr(context: Context, attr: Int): Int {
+            val typedValue = TypedValue()
+            val theme = context.theme
+            theme.resolveAttribute(attr, typedValue, true)
+            return typedValue.data
+        }
+
         signupViewModel.signupResult.observe(this) { response ->
             if (response != null) {
-                AlertDialog.Builder(this).apply {
-                    setTitle("Yeah!")
-                    setMessage(response.message ?: "Pendaftaran berhasil! Silahkan login.")
+                val textColor = getColorFromAttr(this, R.attr.colorDialogText)
+                val buttonColor = getColorFromAttr(this, R.attr.colorDialogButton)
+                val blackColor = ContextCompat.getColor(this, android.R.color.black)
+
+                val title = SpannableString("Yeah!").apply {
+                    setSpan(ForegroundColorSpan(blackColor), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                val message = SpannableString(response.message ?: "Pendaftaran berhasil! Silahkan login.").apply {
+                    setSpan(ForegroundColorSpan(blackColor), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+
+                val dialog = AlertDialog.Builder(this).apply {
+                    setTitle(title)
+                    setMessage(message)
                     setPositiveButton("Lanjut") { _, _ ->
                         finish()
                     }
-                    create()
-                    show()
+                }.create()
+
+                dialog.setOnShowListener {
+                    dialog.findViewById<TextView>(android.R.id.message)?.setTextColor(textColor)
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(buttonColor)
                 }
+
+                dialog.show()
             }
         }
+
 
         signupViewModel.errorMessage.observe(this) { error ->
             if (!error.isNullOrEmpty()) {

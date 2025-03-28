@@ -25,7 +25,10 @@
     <string name="chat_whatsapp">Chat WhatsApp</string>
     <string name="title">Title</string>
 
-    <string name="password_error">Password must not be less than 8 characters</string>
+    <string name="password_error">Password harus minimal 8 karakter dan mengandung huruf serta angka</string>
     <string name="email_error">Invalid email format</string>
+    <string name="name_error">Nama tidak boleh kosong</string>
+    <string name="kota_error">Nama kota harus dimulai dengan huruf kapital dan sisanya huruf kecil</string>
+
 
 </resources>

@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
             }
 
             setContentView(R.layout.activity_splash)
-            window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+            window.statusBarColor = ContextCompat.getColor(this, R.color.pink)
 
             Handler(Looper.getMainLooper()).postDelayed({
                 val intent = Intent(this, MainActivity::class.java)

@@ -1,10 +1,12 @@
 package com.hibahuns.dentassist.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Html
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -68,13 +70,23 @@ class ProfileFragment : Fragment() {
         return root
     }
 
+    fun getColorFromAttr(context: Context, attr: Int): Int {
+        val typedValue = TypedValue()
+        val theme = context.theme
+        theme.resolveAttribute(attr, typedValue, true)
+        return typedValue.data
+    }
+
     override fun onResume() {
         super.onResume()
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
-            title = Html.fromHtml("<font color='#EA7676'>Profile</font>", 1)
-            setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
+        val activity = requireActivity() as AppCompatActivity
+
+        val actionBarColor = getColorFromAttr(activity, R.attr.colorPrimaryTool)
+        val titleColor = getColorFromAttr(activity, R.attr.colorAccent)
+
+        activity.supportActionBar?.apply {
+            setBackgroundDrawable(ColorDrawable(actionBarColor))
+            title = Html.fromHtml("<font color='${String.format("#%06X", 0xFFFFFF and titleColor)}'>DentAssist</font>", 1)
         }
     }
 }

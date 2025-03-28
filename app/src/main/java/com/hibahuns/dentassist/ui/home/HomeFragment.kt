@@ -1,10 +1,13 @@
 package com.hibahuns.dentassist.ui.home
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Html
+import android.util.TypedValue
+import androidx.core.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hibahuns.dentassist.R
 import com.hibahuns.dentassist.databinding.FragmentHomeBinding
 import com.hibahuns.dentassist.ui.ViewModelFactory
+import com.hibahuns.dentassist.ui.login.LoginActivity
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -33,11 +37,14 @@ class HomeFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+    private val viewModel: HomeViewModel by viewModels { ViewModelFactory.getInstance(requireContext()) }
+
     private val binding get() = _binding!!
     private lateinit var homeViewModel: HomeViewModel
     private var clinicsRvData: MutableList<RvDataItem> = mutableListOf()
     private var productsRvData: MutableList<RvDataItem> = mutableListOf()
     private var articlesRvData: MutableList<RvDataItem> = mutableListOf()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,6 +81,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObserver() {
+        //apakah si user login apa enggak? jika enggak maka kembali ke LoginActivity
+        viewModel.getSession().observe(viewLifecycleOwner) { user ->
+            if (!user.isLogin) {
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+        }
+
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -175,14 +192,26 @@ class HomeFragment : Fragment() {
         )
     }
 
+    fun getColorFromAttr(context: Context, attr: Int): Int {
+        val typedValue = TypedValue()
+        val theme = context.theme
+        theme.resolveAttribute(attr, typedValue, true)
+        return typedValue.data
+    }
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
-            title = Html.fromHtml("<font color='#EA7676'>DentAssist</font>", 1)
+        val activity = requireActivity() as AppCompatActivity
+
+        val actionBarColor = getColorFromAttr(activity, R.attr.colorPrimaryTool)
+        val titleColor = getColorFromAttr(activity, R.attr.colorAccent)
+
+        activity.supportActionBar?.apply {
+            setBackgroundDrawable(ColorDrawable(actionBarColor))
+            title = Html.fromHtml("<font color='${String.format("#%06X", 0xFFFFFF and titleColor)}'>DentAssist</font>", 1)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

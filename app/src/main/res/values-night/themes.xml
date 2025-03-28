@@ -3,16 +3,32 @@
     <style name="Theme.DentAssist" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorPrimaryVariant">@color/button_grey</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/grey</item>
+        <item name="colorSecondaryVariant">@color/button_grey</item>
+        <item name="colorOnSecondary">@color/white</item>
 
-    <item name="colorPrimary">@color/purple_200</item>
-        <item name="color">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+<!--attr-->
+        <item name="colorDivider">@color/white</item>
+        <item name="colorStroke">@color/white</item>
+
+        <!--end-->
+        <item name="colorDialogText">@color/white</item>
+        <item name="colorDialogButton">@color/secondary_pink</item>
+        <item name="colorPrimaryTool">@color/dark_blue</item>
+        <item name="colorAccent">@color/secondary_pink</item>
+        <item name="colorTextPrimary">@color/white</item>
+        <item name="backgroundColor">@color/dark_blue</item>
+        <item name="iconColor">@color/white</item>
+
+
+
+
+        <item name="android:statusBarColor">@color/dark_blue</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+<!--        <item name="android:background">@color/dark_blue</item>-->
     </style>
 </resources>
