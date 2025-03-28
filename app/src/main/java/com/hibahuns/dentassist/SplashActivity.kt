@@ -14,6 +14,7 @@ import com.hibahuns.dentassist.ui.setting.SgViewModel
 import com.hibahuns.dentassist.ui.setting.dataStore
 
 
+@Suppress("DEPRECATION")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
