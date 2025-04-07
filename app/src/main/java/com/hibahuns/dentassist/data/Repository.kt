@@ -49,8 +49,9 @@ class Repository private constructor(
         username: String,
         email: String,
         city: String,
+        profileImage: String
     ): UserResponse {
-        val request = UpdateUserRequest(username, email,city)
+        val request = UpdateUserRequest(username, email, city, profileImage)
         return apiService.updateUserProfile(idUser, request)
     }
 
