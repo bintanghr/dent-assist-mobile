@@ -1,10 +1,13 @@
 package com.hibahuns.dentassist.ui.profile
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,17 +15,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.fragment.app.findFragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import com.hibahuns.dentassist.R
 import com.hibahuns.dentassist.data.pref.UserPreference
 import com.hibahuns.dentassist.data.pref.dataStore
 import com.hibahuns.dentassist.databinding.FragmentProfileBinding
+import com.hibahuns.dentassist.ui.ViewModelFactory
+import com.hibahuns.dentassist.ui.login.LoginActivity
+
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -69,20 +73,28 @@ class ProfileFragment : Fragment() {
             }
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    private val profileViewModel by viewModels<ProfileViewModel> {
+        ViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         profilePicture = binding.profilePicture
+
+        profilePicture = binding.profilePicture
+
+        profileViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            if (!user.isLogin) {
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            }
+        }
 
         val username = "Teuku Umar"
         val userEmail = "teukubrebes123@gmail.com"
@@ -90,7 +102,7 @@ class ProfileFragment : Fragment() {
         binding.username.text = username
         binding.userEmail.text = userEmail
 
-        binding.btnCs.setOnClickListener {
+        binding.btnEditProfile.setOnClickListener {
             findNavController().navigate(
                 R.id.navigation_cs,
                 null,
@@ -100,6 +112,20 @@ class ProfileFragment : Fragment() {
             )
         }
 
+        binding.btnSetting.setOnClickListener {
+            findNavController().navigate(
+                R.id.navigation_sg,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.navigation_profile, false)
+                    .build()
+            )
+        }
+
+        binding.logoutButton.setOnClickListener {
+            profileViewModel.logout()
+        }
+
         binding.divProfilePicture.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
@@ -107,14 +133,23 @@ class ProfileFragment : Fragment() {
         return root
     }
 
-    override fun onResume() {
-        super.onResume()
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFFFFF")))
-            title = Html.fromHtml("<font color='#EA7676'>Profile</font>", 1)
-            setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_ios_new_24)
-        }
+    fun getColorFromAttr(context: Context, attr: Int): Int {
+        val typedValue = TypedValue()
+        val theme = context.theme
+        theme.resolveAttribute(attr, typedValue, true)
+        return typedValue.data
     }
 
+    override fun onResume() {
+        super.onResume()
+        val activity = requireActivity() as AppCompatActivity
+
+        val actionBarColor = getColorFromAttr(activity, R.attr.colorPrimaryTool)
+        val titleColor = getColorFromAttr(activity, R.attr.colorAccent)
+
+        activity.supportActionBar?.apply {
+            setBackgroundDrawable(ColorDrawable(actionBarColor))
+            title = Html.fromHtml("<font color='${String.format("#%06X", 0xFFFFFF and titleColor)}'>DentAssist</font>", 1)
+        }
+    }
 }

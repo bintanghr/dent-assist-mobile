@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hibahuns.dentassist.data.Repository
 import com.hibahuns.dentassist.di.Injection
-import com.hibahuns.dentassist.ui.clinics.ClinicsViewModel
 import com.hibahuns.dentassist.ui.dashboard.DashboardViewModel
 import com.hibahuns.dentassist.ui.home.HomeViewModel
+import com.hibahuns.dentassist.ui.login.LoginViewModel
 import com.hibahuns.dentassist.ui.notifications.NotificationsViewModel
 import com.hibahuns.dentassist.ui.prediction.PredictionViewModel
+import com.hibahuns.dentassist.ui.profile.ProfileViewModel
+import com.hibahuns.dentassist.ui.signup.SignupViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -29,18 +31,19 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             modelClass.isAssignableFrom(PredictionViewModel::class.java) -> {
                 PredictionViewModel(repository) as T
             }
-//            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-//                LoginViewModel(repository) as T
-//            }
-//            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
+                SignupViewModel(repository) as T
+            }
+
+            //            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
 //                HomeViewModel(repository) as T
 //            }
-//            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
-//                ProfileViewModel(repository) as T
-//            }
-//            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
-//                SignupViewModel(repository) as T
-//            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
+            }
 //            modelClass.isAssignableFrom(CameraViewModel::class.java) -> {
 //                CameraViewModel(repository) as T
 //            }

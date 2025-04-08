@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorDivider" format="color" />
+    <attr name="colorStroke" format="color" />
+
+    <attr name="colorDialogText" format="color" />
+    <attr name="colorDialogButton" format="color" />
+
+
+    <attr name="colorPrimaryTool" format="color" />
+    <attr name="colorAccent" format="color" />
+
+    <attr name="colorTextPrimary" format="color" />
+    <attr name="backgroundColor" format="color"/>
+    <attr name="iconColor" format="color"/>
+
+
+
+
+</resources>

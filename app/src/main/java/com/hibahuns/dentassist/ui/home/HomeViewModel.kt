@@ -1,14 +1,18 @@
 package com.hibahuns.dentassist.ui.home
 
 import android.icu.util.Calendar
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.hibahuns.dentassist.data.Repository
 import com.hibahuns.dentassist.data.api.response.ArticleResponse
 import com.hibahuns.dentassist.data.api.response.ClinicResponse
 import com.hibahuns.dentassist.data.api.response.ProductResponse
+import com.hibahuns.dentassist.data.api.response.UserResponse
+import com.hibahuns.dentassist.data.pref.UserModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -70,5 +74,8 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
             in 15..17 -> "Selamat Sore, Teuku Umar!"
             else -> "Selamat Malam, Teuku Umar!"
         }
+    }
+    fun getSession(): LiveData<UserModel> {
+        return repository.getSession().asLiveData()
     }
 }

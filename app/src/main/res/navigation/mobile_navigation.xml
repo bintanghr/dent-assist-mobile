@@ -56,6 +56,10 @@
         <action
             android:id="@+id/action_fragmentProfile_to_fragmentCs"
             app:destination="@id/navigation_cs" />
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentSg"
+            app:destination="@id/navigation_cs" />
+
     </fragment>
 
     <fragment
@@ -64,7 +68,12 @@
         android:label="CS"
         tools:layout="@layout/fragment_cs">
     </fragment>
-
+    <fragment
+        android:id="@+id/navigation_sg"
+        android:name="com.hibahuns.dentassist.ui.setting.SgFragment"
+        android:label="SG"
+        tools:layout="@layout/fragment_setting">
+    </fragment>
     <fragment
         android:id="@+id/navigation_clinics"
         android:name="com.hibahuns.dentassist.ui.clinics.ClinicsFragment"
