@@ -39,8 +39,26 @@ data class ProductsItem(
 	val ket: String? = null,
 
 	@field:SerializedName("link_photo")
-	val linkPhoto: String? = null
-) : Parcelable
+	val linkPhoto: String? = null,
+
+	@field:SerializedName("category")
+	val category: String? = null,
+
+	@field:SerializedName("shape")
+	val shape: String? = null,
+
+	@field:SerializedName("description")
+	val description: String? = null,
+
+	@field:SerializedName("notes")
+	val notes: String? = null,
+
+//	@field:SerializedName("keys")
+//	val keys: List<String>? = null,
+
+	@field:SerializedName("rating")
+	val rating: String? = null
+	) : Parcelable
 
 @Parcelize
 data class ArticlesItem(
@@ -55,7 +73,19 @@ data class ArticlesItem(
 	val title: String? = null,
 
 	@field:SerializedName("name")
-	val name: String? = null
+	val name: String? = null,
+
+	@field:SerializedName("contents")
+	val contents: String? = null,
+
+	@field:SerializedName("publicationDate")
+	val publicationDate: String? = null,
+
+//	@field:SerializedName("keys")
+//	val keys: List<String?>? = null,
+
+	@field:SerializedName("imageUrl")
+	val imageUrl: String? = null
 ) : Parcelable
 
 @Parcelize

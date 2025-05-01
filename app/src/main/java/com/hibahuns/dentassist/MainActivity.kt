@@ -47,6 +47,11 @@ class MainActivity : AppCompatActivity() {
                     .build()
             )
         }
+
+        binding.btnScan.setOnClickListener {
+//            val bottomNav = activit.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            binding.navView.selectedItemId = R.id.navigation_dashboard
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

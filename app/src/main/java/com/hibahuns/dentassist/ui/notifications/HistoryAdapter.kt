@@ -22,6 +22,8 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import kotlin.math.round
+
 class HistoryAdapter : ListAdapter<DataItemHistory, HistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -39,7 +41,7 @@ class HistoryAdapter : ListAdapter<DataItemHistory, HistoryAdapter.ViewHolder>(D
     class ViewHolder(private val binding: RvItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(data: DataItemHistory) {
-            val accuracy = "Akurasi ${DecimalFormat("#.##").format(data.confidenceScore)}%"
+            val accuracy = "Akurasi ${data.confidenceScore?.let { round(it).toInt() }}%"
             binding.timestamp.text = formatTimestamp(data.createdAt)
             binding.itemTitle.text = data.label
             binding.itemDescription.text= accuracy
@@ -80,13 +82,10 @@ class HistoryAdapter : ListAdapter<DataItemHistory, HistoryAdapter.ViewHolder>(D
 
                 view?.post {
                     findNavController(view.findFragment())
-                        .navigate(R.id.action_fragmentNotifications_to_fragmentPrediction,
-                            bundle,
-                            NavOptions.Builder()
-                                .setRestoreState(true)
-                                .setPopUpTo(R.id.mobile_navigation, false)
-                                .build()
-                    )
+                        .navigate(
+                            R.id.action_fragmentNotifications_to_fragmentPrediction,
+                            bundle
+                        )
                 }
             }
 

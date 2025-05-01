@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -83,26 +84,25 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        profilePicture = binding.profilePicture
+        val username = "Teuku Umar"
+        var userEmail = "teukubrebes@gmail.com"
 
         profilePicture = binding.profilePicture
 
         profileViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            binding.userEmail.text = user.email
             if (!user.isLogin) {
                 val intent = Intent(requireContext(), LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
+                userEmail = user.email
             }
         }
-
-        val username = "Teuku Umar"
-        val userEmail = "teukubrebes123@gmail.com"
 
         binding.username.text = username
         binding.userEmail.text = userEmail
 
-        binding.btnEditProfile.setOnClickListener {
+        binding.btnCs.setOnClickListener {
             findNavController().navigate(
                 R.id.navigation_cs,
                 null,

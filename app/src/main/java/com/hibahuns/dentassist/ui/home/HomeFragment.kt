@@ -30,6 +30,8 @@ import com.hibahuns.dentassist.databinding.FragmentHomeBinding
 import com.hibahuns.dentassist.ui.ViewModelFactory
 import com.hibahuns.dentassist.ui.login.LoginActivity
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -99,11 +101,14 @@ class HomeFragment : Fragment() {
 //                            val rvData: MutableList<RvDataItem> = mutableListOf()
 
                             for (clinic in clinics) {
-                                val id: String = clinic?.idClinic ?: ""
-                                val title: String = clinic?.name ?: ""
-                                val description: String = clinic?.address ?: ""
-                                val imageUrl: String = clinic?.photo ?: ""
-                                val data = RvDataItem(id, title, description, imageUrl)
+                                val id = clinic?.idClinic ?: ""
+                                val title = clinic?.name ?: ""
+                                val subTitle = clinic?.city ?: ""
+                                val category = clinic?.noTelp ?: ""
+                                val description = clinic?.address ?: ""
+                                val subDescription = clinic?.rating.toString()
+                                val imageUrl = clinic?.photo ?: ""
+                                val data = RvDataItem(id, title, subTitle, category, description, subDescription, imageUrl, "clinic")
                                 clinicsRvData.add(data)
                             }
 
@@ -126,11 +131,19 @@ class HomeFragment : Fragment() {
 //                            val rvData: MutableList<RvDataItem> = mutableListOf()
 
                             for (product in products) {
-                                val id: String = product?.idProduct ?: ""
-                                val title: String = product?.name ?: ""
-                                val description: String = (product?.price.toString())
-                                val imageUrl: String = product?.linkPhoto ?: ""
-                                val data = RvDataItem(id, title, description, imageUrl)
+                                val id = product?.idProduct ?: ""
+                                val title = product?.name ?: ""
+                                val category = product?.ket ?: ""
+                                val description = product?.disease ?: ""
+                                val subDescription = product?.dosis ?: ""
+                                val imageUrl = product?.linkPhoto ?: ""
+
+                                val localeID = Locale("in", "ID")
+                                val numberFormat = NumberFormat.getNumberInstance(localeID)
+                                val subTitle = "Rp ${numberFormat.format(product?.price)}"
+
+                                val data = RvDataItem(id, title, subTitle, category, description, subDescription, imageUrl, "product")
+
                                 productsRvData.add(data)
                             }
 
@@ -153,12 +166,15 @@ class HomeFragment : Fragment() {
 //                            val rvData: MutableList<RvDataItem> = mutableListOf()
 
                             for (article in articles) {
-                                val id: String = article?.idProduct ?: ""
-                                val title: String = article?.disease ?: ""
-                                val description: String = article?.name ?: ""
-//                                val imageUrl: String = article?.linkPhoto ?: "https://drive.google.com/uc?export=view&id=17s-a0tqsyQsDB5fmeR75ye2Z1vnDK1Wt"
-                                val imageUrl = "https://drive.google.com/uc?export=view&id=17s-a0tqsyQsDB5fmeR75ye2Z1vnDK1Wt"
-                                val data = RvDataItem(id, title, description, imageUrl)
+                                val id = article?.idArticle ?: ""
+                                val title = article?.name ?: ""
+                                val subTitle = article?.disease ?: ""
+                                val category = ""
+                                val description = ""
+                                val subDescription = ""
+                                val imageUrl: String = article?.imageUrl ?: "https://drive.google.com/uc?export=view&id=17s-a0tqsyQsDB5fmeR75ye2Z1vnDK1Wt"
+//                                val imageUrl = "https://drive.google.com/uc?export=view&id=17s-a0tqsyQsDB5fmeR75ye2Z1vnDK1Wt"
+                                val data = RvDataItem(id, title, subTitle, category, description, subDescription, imageUrl, "article")
                                 articlesRvData.add(data)
                             }
 
@@ -192,7 +208,7 @@ class HomeFragment : Fragment() {
         )
     }
 
-    fun getColorFromAttr(context: Context, attr: Int): Int {
+    private fun getColorFromAttr(context: Context, attr: Int): Int {
         val typedValue = TypedValue()
         val theme = context.theme
         theme.resolveAttribute(attr, typedValue, true)

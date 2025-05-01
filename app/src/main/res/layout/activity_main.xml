@@ -50,9 +50,9 @@
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="14dp"
         android:paddingTop="10dp"
         android:background="@drawable/bottom_nav_background"
         app:defaultNavHost="true"
@@ -66,24 +66,35 @@
         app:itemIconTint="@color/nav_item_color"
         />
     <FrameLayout
+        android:id="@+id/btn_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="35dp"
         android:translationZ="8dp"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="@color/pink"
+        android:padding="8dp"
         >
-
-        <ImageView
-            android:id="@+id/nav_add"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/baseline_camera_24"
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/circle_background"
-            android:backgroundTint="@color/font_brown"
-            android:layout_gravity="center"/>
+            android:backgroundTint="@color/white"
+            android:padding="3dp"
+            >
+            <ImageView
+                android:id="@+id/camera_image"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:padding="8dp"
+                android:src="@drawable/camera"
+                android:background="@drawable/circle_background"
+                android:backgroundTint="@color/pink"
+                android:layout_gravity="center"/>
+        </FrameLayout>
     </FrameLayout>
 
     <fragment

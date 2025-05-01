@@ -29,6 +29,23 @@
     <string name="email_error">Invalid email format</string>
     <string name="name_error">Nama tidak boleh kosong</string>
     <string name="kota_error">Nama kota harus dimulai dengan huruf kapital dan sisanya huruf kecil</string>
+    <string name="lorem_ipsum">lorem ipsum</string>
+    <string name="lorem_ipsum_paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="kategori">Kategori</string>
+    <string name="customer_support">Customer Support</string>
+    <string name="disease_image">disease image</string>
+    <string name="nama_penyakit">Nama Penyakit</string>
+    <string name="akurasi">Akurasi</string>
+    <string name="sariawan">Sariawan</string>
+    <string name="_95">95%</string>
+    <string name="clinic_recmoendation_title">Klink terdekat yang disarankan untuk anda</string>
+    <string name="produk_rekomendasi_untuk_anda">Produk rekomendasi untuk anda</string>
+    <string name="artikel_terkait_penyakit_anda">Artikel terkait penyakit anda</string>
+    <string name="gagal_mendapatkan_data_klinik">Gagal mendapatkan data klinik</string>
+    <string name="product_not_found">Tidak terdapat produk yang direkomendasikan</string>
+    <string name="article_not_found">Tidak terdapat artikel yang direkomendasikan</string>
+    <string name="logo">logo</string>
 
 
 </resources>

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ArticleResponse(
 
 	@field:SerializedName("data")
-	val data: List<ProductDataItem?>? = null,
+	val data: List<ArticleDataItem?>? = null,
 
 	@field:SerializedName("status")
 	val status: String? = null
@@ -26,4 +26,16 @@ data class ArticleDataItem(
 
 	@field:SerializedName("title")
 	val title: String? = null,
+
+	@field:SerializedName("image")
+	val imageUrl: String? = null,
+
+	@field:SerializedName("contents")
+	val contents: String? = null,
+
+	@field:SerializedName("publicationDate")
+	val publicationDate: String? = null,
+
+	@field:SerializedName("keys")
+	val keys: List<String>? = null,
 )

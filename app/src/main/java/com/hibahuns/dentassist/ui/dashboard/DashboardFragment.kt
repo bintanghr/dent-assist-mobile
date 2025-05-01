@@ -239,9 +239,10 @@ class DashboardFragment : Fragment() {
             val userPreference = UserPreference.getInstance(requireContext().dataStore)
             lifecycleScope.launch {
                 userPreference.getSession().collect { userModel ->
-//                    val idUserRequestBody = userModel.idUser.toRequestBody("text/plain".toMediaTypeOrNull())
-                    val json = "SDzHFAoNiHtFBnHE58EJ"
-                    val idUserRequestBody = json.toRequestBody("text/plain".toMediaType())
+                    val idUserRequestBody = userModel.idUser.toRequestBody("text/plain".toMediaTypeOrNull())
+//                    Log.d("id user", "$idUserRequestBody")
+//                    val json = "SDzHFAoNiHtFBnHE58EJ"
+//                    val idUserRequestBody = json.toRequestBody("text/plain".toMediaType())
 
                     dashboardViewModel.predict(imageBody, idUserRequestBody)
                 }

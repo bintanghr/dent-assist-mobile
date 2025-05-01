@@ -32,5 +32,8 @@ data class DataItem(
 	val photo: String? = null,
 
 	@field:SerializedName("no_telp")
-	val noTelp: String? = null
+	val noTelp: String? = null,
+
+	@field:SerializedName("rating")
+	val rating: Double? = null,
 )

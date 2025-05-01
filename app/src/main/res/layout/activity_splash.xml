@@ -25,14 +25,14 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:background="@color/pink"
-            android:contentDescription="gambar logo"
-            android:src="@drawable/logo" />
+            android:contentDescription="@string/logo"
+            android:src="@drawable/dent_assist_logo" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36dp"
+            android:textSize="36sp"
             android:background="@color/pink"
-            android:text="DentAssist"
+            android:text="@string/app_name"
             android:textColor="@color/white">
         </TextView>
 

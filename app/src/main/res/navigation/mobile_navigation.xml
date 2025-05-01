@@ -79,6 +79,15 @@
         android:name="com.hibahuns.dentassist.ui.clinics.ClinicsFragment"
         android:label="Klinik"
         tools:layout="@layout/fragment_clinics">
+        <action
+            android:id="@+id/action_fragmentRV_to_fragmentDetailItem"
+            app:destination="@id/navigation_detail_item" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_detail_item"
+        android:name="com.hibahuns.dentassist.ui.clinics.DetailItemFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail_item">
 
     </fragment>
     <action
