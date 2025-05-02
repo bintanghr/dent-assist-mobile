@@ -1,9 +1,12 @@
 package com.hibahuns.dentassist
 
 import android.os.Bundle
+import android.widget.FrameLayout
+import android.widget.ImageView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -25,7 +28,28 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
+
+        val cameraImage = findViewById<ImageView>(R.id.camera_image)
+        val cameraCircle = findViewById<FrameLayout>(R.id.camera_circle)
+        cameraCircle.setBackgroundResource(R.drawable.circle_background)
+        val paddingInDp = 3
+        val scale = resources.displayMetrics.density
+        val paddingInPx = (paddingInDp * scale + 0.5f).toInt()
+        cameraCircle.setPadding(paddingInPx, paddingInPx, paddingInPx, paddingInPx)
+
         navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_dashboard -> {
+                    cameraImage.setImageResource(R.drawable.camera_selected)
+                    cameraCircle.backgroundTintList = ContextCompat.getColorStateList(binding.root.context, R.color.font_brown)
+
+                } else -> {
+                    cameraImage.setImageResource(R.drawable.camera)
+                    cameraCircle.backgroundTintList = ContextCompat.getColorStateList(binding.root.context, R.color.white)
+                }
+            }
+        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(

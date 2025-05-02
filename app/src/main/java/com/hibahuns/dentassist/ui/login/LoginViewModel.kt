@@ -1,6 +1,7 @@
 package com.hibahuns.dentassist.ui.login
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,14 +27,17 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
             _isLoading.value = true
             try {
                 val response = repository.login(email, password)
+                _loginResult.value = response
                 repository.saveSession(
                     UserModel(
                         email = email,
                         idUser = response.idUser ?: "",
-                        isLogin = true
+                        isLogin = true,
+                        username = response.username ?: "",
+                        city = response.city ?: "",
+                        profileImage = response.profileImage ?: ""
                     )
                 )
-                _loginResult.value = response
             }catch (e: retrofit2.HttpException) {
                 val errorBody = e.response()?.errorBody()?.string()
                 if (errorBody != null) {

@@ -37,10 +37,6 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
                 SignupViewModel(repository) as T
             }
-
-            //            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-//                HomeViewModel(repository) as T
-//            }
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
             }

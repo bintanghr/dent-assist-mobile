@@ -15,7 +15,6 @@
     <color name='button_grey'>#2C2C2C</color>
     <color name='red'>#F03232</color>
     <color name="dark_blue">#1D2733</color>
-
-
     <color name="transparent">#00FFFFFF</color>
+    <color name="black_20">#20000000</color>
 </resources>

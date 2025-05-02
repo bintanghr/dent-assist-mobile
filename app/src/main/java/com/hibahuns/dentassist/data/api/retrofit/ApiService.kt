@@ -36,10 +36,15 @@ interface ApiService {
     suspend fun user(
         @Path("idUser") idUser: String): UserResponse
 
+    @Multipart
     @PUT("users/{idUser}")
     suspend fun updateUserProfile(
         @Path("idUser") idUser: String,
-        @Body request: UpdateUserRequest
+        @Part("username") username: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("password") password: RequestBody?,
+        @Part("city") city: RequestBody,
+        @Part profileImage: MultipartBody.Part?
     ): UserResponse
 
     @Multipart

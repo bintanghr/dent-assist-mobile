@@ -1,5 +1,6 @@
 package com.hibahuns.dentassist.data
 
+import android.util.Log
 import com.hibahuns.dentassist.data.api.request.LoginRequest
 import com.hibahuns.dentassist.data.api.request.SignupRequest
 import com.hibahuns.dentassist.data.api.request.UpdateUserRequest
@@ -46,13 +47,13 @@ class Repository private constructor(
 
     suspend fun updateUserProfile(
         idUser: String,
-        username: String,
-        email: String,
-        city: String,
-        profileImage: String
+        username: RequestBody,
+        email: RequestBody,
+        password: RequestBody?,
+        city: RequestBody,
+        profileImage: MultipartBody.Part?
     ): UserResponse {
-        val request = UpdateUserRequest(username, email, city, profileImage)
-        return apiService.updateUserProfile(idUser, request)
+        return apiService.updateUserProfile(idUser, username, email, password, city, profileImage)
     }
 
 

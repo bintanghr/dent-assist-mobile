@@ -90,6 +90,13 @@
         tools:layout="@layout/fragment_detail_item">
 
     </fragment>
+    <fragment
+        android:id="@+id/navigation_profile_edit"
+        android:name="com.hibahuns.dentassist.ui.profile.ProfileEditFragment"
+        android:label="Edit Profil"
+        tools:layout="@layout/fragment_profile_edit">
+
+    </fragment>
     <action
         android:id="@+id/action_to_fragmentProfile"
         app:destination="@id/navigation_profile" />

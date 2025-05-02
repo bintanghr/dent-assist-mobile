@@ -13,6 +13,9 @@ data class ProductResponse(
 
 data class ProductDataItem(
 
+	@field:SerializedName("idProduct")
+	val idProduct: String? = null,
+
 	@field:SerializedName("disease")
 	val disease: String? = null,
 
@@ -25,12 +28,24 @@ data class ProductDataItem(
 	@field:SerializedName("name")
 	val name: String? = null,
 
-	@field:SerializedName("idProduct")
-	val idProduct: String? = null,
-
 	@field:SerializedName("ket")
 	val ket: String? = null,
 
 	@field:SerializedName("link_photo")
-	val linkPhoto: String? = null
+	val linkPhoto: String? = null,
+
+	@field:SerializedName("category")
+	val category: String? = null,
+
+	@field:SerializedName("shape")
+	val shape: String? = null,
+
+	@field:SerializedName("description")
+	val description: String? = null,
+
+	@field:SerializedName("notes")
+	val notes: List<String>? = null,
+
+	@field:SerializedName("keys")
+	val keys: List<String>? = null
 )

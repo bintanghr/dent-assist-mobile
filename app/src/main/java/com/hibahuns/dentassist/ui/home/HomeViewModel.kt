@@ -1,5 +1,6 @@
 package com.hibahuns.dentassist.ui.home
 
+import android.content.Intent
 import android.icu.util.Calendar
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -13,16 +14,12 @@ import com.hibahuns.dentassist.data.api.response.ClinicResponse
 import com.hibahuns.dentassist.data.api.response.ProductResponse
 import com.hibahuns.dentassist.data.api.response.UserResponse
 import com.hibahuns.dentassist.data.pref.UserModel
+import com.hibahuns.dentassist.ui.login.LoginActivity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: Repository) : ViewModel() {
-
-    private val _welcomeText = MutableLiveData<String>().apply {
-        value = getGreetingMessage()
-    }
-    val welcomeText: LiveData<String> = _welcomeText
 
     private val _clinics = MutableStateFlow<ClinicResponse?>(null)
     val clinics: StateFlow<ClinicResponse?> = _clinics
@@ -66,15 +63,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    private fun getGreetingMessage(): String {
-        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        return when (hour) {
-            in 5..11 -> "Selamat Pagi, Teuku Umar!"
-            in 12..14 -> "Selamat Siang, Teuku Umar!"
-            in 15..17 -> "Selamat Sore, Teuku Umar!"
-            else -> "Selamat Malam, Teuku Umar!"
-        }
-    }
+
     fun getSession(): LiveData<UserModel> {
         return repository.getSession().asLiveData()
     }

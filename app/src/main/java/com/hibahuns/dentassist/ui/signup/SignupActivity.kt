@@ -3,8 +3,10 @@ package com.hibahuns.dentassist.ui.signup
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.WindowInsets
@@ -32,6 +34,9 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.emailEditText.addTextChangedListener(textWatcher)
+        binding.passwordEditText.addTextChangedListener(textWatcher)
 
         setupView()
         setupAction()
@@ -137,5 +142,23 @@ class SignupActivity : AppCompatActivity() {
         signupViewModel.isLoading.observe(this) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+
+            val isEmailFilled = binding.emailEditText.text?.isNotEmpty() ?: false
+            val isPasswordFilled = binding.passwordEditText.text?.isNotEmpty() ?: false
+
+            if (isEmailFilled && isPasswordFilled) {
+                binding.signupButton.background = ContextCompat.getDrawable(binding.root.context, R.drawable.button2)
+            } else {
+                binding.signupButton.background = ContextCompat.getDrawable(binding.root.context, R.drawable.button2_disabled)
+            }
+        }
+
+        override fun afterTextChanged(charSequence: Editable?) {}
     }
 }

@@ -46,6 +46,17 @@
     <string name="product_not_found">Tidak terdapat produk yang direkomendasikan</string>
     <string name="article_not_found">Tidak terdapat artikel yang direkomendasikan</string>
     <string name="logo">logo</string>
+    <string name="click_here">Click here</string>
+    <string name="nama">Nama</string>
+    <string name="email">Email</string>
+    <string name="masukkan_email">Masukkan Email</string>
+    <string name="password">Password</string>
+    <string name="masukkan_password">Masukkan Password</string>
+    <string name="perbarui_data">Perbarui Data</string>
+    <string name="username">Username</string>
+    <string name="masukkan_username">Masukkan Username</string>
+    <string name="kota">Kota</string>
+    <string name="masukkan_kota">Masukkan Kota</string>
 
 
 </resources>

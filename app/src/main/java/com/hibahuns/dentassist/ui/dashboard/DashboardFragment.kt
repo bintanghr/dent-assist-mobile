@@ -14,6 +14,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.hibahuns.dentassist.data.pref.dataStore
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
@@ -274,7 +275,23 @@ class DashboardFragment : Fragment() {
             setBackgroundDrawable(ColorDrawable(actionBarColor))
             title = Html.fromHtml("<font color='${String.format("#%06X", 0xFFFFFF and titleColor)}'>DentAssist</font>", 1)
         }
+
+//        val cameraImage = requireActivity().findViewById<ImageView>(R.id.camera_image)
+//        cameraImage.setImageResource(R.drawable.camera_selected)
+//
+//        val cameraCircle = requireActivity().findViewById<ImageView>(R.id.camera_circle)
+//        cameraCircle.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.font_brown))
     }
+
+//    override fun onPause() {
+//        super.onPause()
+//
+//        val cameraImage = requireActivity().findViewById<ImageView>(R.id.camera_image)
+//        cameraImage.setImageResource(R.drawable.camera_selected)
+//
+//        val cameraCircle = requireActivity().findViewById<ImageView>(R.id.camera_circle)
+//        cameraCircle.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.font_brown))
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

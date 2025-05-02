@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.Html
 import android.util.TypedValue
@@ -59,11 +60,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val welcomeText: TextView = binding.welcomeText
-        homeViewModel.welcomeText.observe(viewLifecycleOwner) {
-            welcomeText.text = it
-        }
-
         setupObserver()
         homeViewModel.fetchArticles()
         homeViewModel.fetchClinics()
@@ -90,8 +86,9 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
                 requireActivity().finish()
             }
-        }
 
+            binding.welcomeText.text = getGreetingMessage(user.username)
+        }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -105,10 +102,14 @@ class HomeFragment : Fragment() {
                                 val title = clinic?.name ?: ""
                                 val subTitle = clinic?.city ?: ""
                                 val category = clinic?.noTelp ?: ""
+                                val category2 = ""
                                 val description = clinic?.address ?: ""
                                 val subDescription = clinic?.rating.toString()
+                                val subDescription2: List<String> = emptyList()
+                                val keys: List<String> = emptyList()
+                                val redirectUrl = clinic?.linkMaps ?: ""
                                 val imageUrl = clinic?.photo ?: ""
-                                val data = RvDataItem(id, title, subTitle, category, description, subDescription, imageUrl, "clinic")
+                                val data = RvDataItem(id, title, subTitle, category, category2, description, subDescription, subDescription2, keys, redirectUrl, imageUrl, "clinic")
                                 clinicsRvData.add(data)
                             }
 
@@ -134,15 +135,19 @@ class HomeFragment : Fragment() {
                                 val id = product?.idProduct ?: ""
                                 val title = product?.name ?: ""
                                 val category = product?.ket ?: ""
-                                val description = product?.disease ?: ""
+                                val category2 = product?.shape ?: ""
+                                val description = product?.description ?: ""
                                 val subDescription = product?.dosis ?: ""
+                                val subDescription2: List<String> = product?.notes ?: emptyList()
+                                val keys: List<String> = product?.keys ?: emptyList()
+                                val redirectUrl = ""
                                 val imageUrl = product?.linkPhoto ?: ""
 
                                 val localeID = Locale("in", "ID")
                                 val numberFormat = NumberFormat.getNumberInstance(localeID)
                                 val subTitle = "Rp ${numberFormat.format(product?.price)}"
 
-                                val data = RvDataItem(id, title, subTitle, category, description, subDescription, imageUrl, "product")
+                                val data = RvDataItem(id, title, subTitle, category, category2, description, subDescription, subDescription2, keys, redirectUrl, imageUrl, "product")
 
                                 productsRvData.add(data)
                             }
@@ -169,12 +174,16 @@ class HomeFragment : Fragment() {
                                 val id = article?.idArticle ?: ""
                                 val title = article?.name ?: ""
                                 val subTitle = article?.disease ?: ""
-                                val category = ""
-                                val description = ""
+                                val category = article?.publicationDate ?: ""
+                                val category2 = ""
+                                val description = article?.contents ?: ""
                                 val subDescription = ""
+                                val subDescription2: List<String> = emptyList()
+                                val keys: List<String> = article?.keys ?: emptyList()
+                                val redirectUrl = article?.link ?: ""
                                 val imageUrl: String = article?.imageUrl ?: "https://drive.google.com/uc?export=view&id=17s-a0tqsyQsDB5fmeR75ye2Z1vnDK1Wt"
 //                                val imageUrl = "https://drive.google.com/uc?export=view&id=17s-a0tqsyQsDB5fmeR75ye2Z1vnDK1Wt"
-                                val data = RvDataItem(id, title, subTitle, category, description, subDescription, imageUrl, "article")
+                                val data = RvDataItem(id, title, subTitle, category, category2, description, subDescription, subDescription2, keys, redirectUrl, imageUrl, "article")
                                 articlesRvData.add(data)
                             }
 
@@ -213,6 +222,17 @@ class HomeFragment : Fragment() {
         val theme = context.theme
         theme.resolveAttribute(attr, typedValue, true)
         return typedValue.data
+    }
+
+    private fun getGreetingMessage(username: String): String {
+        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+
+        return when (hour) {
+            in 5..11 -> "Selamat Pagi, $username!"
+            in 12..14 -> "Selamat Siang, $username!"
+            in 15..17 -> "Selamat Sore, $username!"
+            else -> "Selamat Malam, $username!"
+        }
     }
 
     override fun onResume() {
